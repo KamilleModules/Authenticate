@@ -55,7 +55,6 @@ class AuthenticateController extends ApplicationController
         $tf = "common/form";
         $t = $this->getTranslationContext();
         $notifications = NotificationsModel::create();
-        $isConnected = SessionUser::isConnected();
 
 
         //--------------------------------------------
@@ -73,14 +72,13 @@ class AuthenticateController extends ApplicationController
             )
             ->addControl("submit", InputSubmitControl::create()
                 ->name($key)
-                ->addHtmlAttribute("value", __("label.send", $tf))
+                ->addHtmlAttribute("value", __("label.login", $t))
             );
 
 
         //--------------------------------------------
         // HANDLING SUBMIT
         //--------------------------------------------
-        $doRedirect = false;
         if (array_key_exists($key, $_POST)) {
             $name = $_POST['name'];
             $pass = $_POST['pass'];
