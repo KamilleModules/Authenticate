@@ -24,7 +24,9 @@ class AuthenticateRouter implements RouterInterface
     public function match(HttpRequestInterface $request)
     {
         if (false === SessionUser::isConnected()) {
-            return RouterHelper::routerControllerToCallable(XConfig::get("Authenticate.controllerLoginForm"));
+            if (true === XConfig::get('Authenticate.useSplashLoginForm')) {
+                return RouterHelper::routerControllerToCallable(XConfig::get("Authenticate.controllerLoginForm"));
+            }
         } else {
             $dkey = XConfig::get("Authenticate.disconnectGetKey");
             if (array_key_exists($dkey, $_GET)) {
