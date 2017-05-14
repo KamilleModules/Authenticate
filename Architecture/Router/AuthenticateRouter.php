@@ -9,11 +9,11 @@ use Bat\UriTool;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Response\Web\RedirectResponse;
 use Kamille\Architecture\Router\Helper\RouterHelper;
-use Kamille\Architecture\Router\RouterInterface;
+use Kamille\Architecture\Router\Web\WebRouterInterface;
 use Kamille\Ling\Z;
 use Kamille\Services\XConfig;
 
-class AuthenticateRouter implements RouterInterface
+class AuthenticateRouter implements WebRouterInterface
 {
 
     public static function create()
