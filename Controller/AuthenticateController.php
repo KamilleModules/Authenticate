@@ -17,6 +17,7 @@ use FormModel\FormModelInterface;
 use Kamille\Architecture\Response\Web\RedirectResponse;
 use Kamille\Ling\Z;
 use Kamille\Services\XConfig;
+use Kamille\Utils\Laws\Config\LawsConfig;
 use Kamille\Utils\Routsy\RoutsyUtil;
 use Models\Notification\NotificationsModel;
 
@@ -133,7 +134,7 @@ class AuthenticateController extends ApplicationController
         //--------------------------------------------
         // DISPLAYING THE VIEW
         //--------------------------------------------
-        return $this->renderByViewId("Authenticate/loginForm", [
+        return $this->renderByViewId("Authenticate/loginForm", LawsConfig::create()->replace([
             "widgets" => [
                 "main.notification" => [
                     "conf" => [
@@ -146,7 +147,7 @@ class AuthenticateController extends ApplicationController
                     ],
                 ],
             ],
-        ]);
+        ]));
     }
 
 

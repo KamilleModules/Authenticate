@@ -37,7 +37,7 @@ $conf = [
      * Whether or not to display the splash loginForm
      * if the user is not connected
      */
-    "useSplashLoginForm" => true,
+    "useSplashLoginForm" => false,
 
     /**
      * If that key is found in the $_GET array,
