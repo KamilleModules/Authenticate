@@ -4,6 +4,7 @@
 namespace Controller\Authenticate;
 
 
+
 use Authenticate\SessionUser\SessionUser;
 use Authenticate\UserStore\UserStoreInterface;
 use Authenticate\Util\UserToSessionConvertor;
@@ -50,6 +51,9 @@ class AuthenticateController extends ApplicationController
 {
 
 
+    /**
+     * entry form for a backoffice
+     */
     public function renderForm()
     {
         $key = "AuthenticateController_renderForm";
