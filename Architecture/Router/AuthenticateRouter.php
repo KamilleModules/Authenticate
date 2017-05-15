@@ -6,6 +6,7 @@ namespace Module\Authenticate\Architecture\Router;
 
 use Authenticate\SessionUser\SessionUser;
 use Bat\UriTool;
+use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Response\Web\RedirectResponse;
 use Kamille\Architecture\Router\Helper\RouterHelper;
@@ -25,7 +26,7 @@ class AuthenticateRouter implements WebRouterInterface
     {
         if (false === SessionUser::isConnected()) {
             if (true === XConfig::get("Authenticate.useSplashLoginForm")) {
-                return RouterHelper::routerControllerToCallable(XConfig::get("Authenticate.controllerLoginForm"));
+                return XConfig::get("Authenticate.controllerLoginForm");
             }
         } else {
             $dkey = XConfig::get("Authenticate.disconnectGetKey");
@@ -43,6 +44,7 @@ class AuthenticateRouter implements WebRouterInterface
                  */
                 return "";
             } else {
+
                 if (true === XConfig::get("Authenticate.allowSessionRefresh")) {
                     SessionUser::refresh();
                 }

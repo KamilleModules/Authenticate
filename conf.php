@@ -2,6 +2,7 @@
 
 
 use Kamille\Ling\Z;
+use Kamille\Services\XConfig;
 
 $appDir = Z::appDir();
 
@@ -37,7 +38,7 @@ $conf = [
      * Whether or not to display the splash loginForm
      * if the user is not connected
      */
-    "useSplashLoginForm" => false,
+    "useSplashLoginForm" => true,
 
     /**
      * If that key is found in the $_GET array,
