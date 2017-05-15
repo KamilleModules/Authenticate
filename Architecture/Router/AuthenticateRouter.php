@@ -8,6 +8,7 @@ use Authenticate\SessionUser\SessionUser;
 use Bat\UriTool;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
+use Kamille\Architecture\Response\Web\HttpResponseInterface;
 use Kamille\Architecture\Response\Web\RedirectResponse;
 use Kamille\Architecture\Router\Helper\RouterHelper;
 use Kamille\Architecture\Router\Web\WebRouterInterface;
@@ -25,7 +26,7 @@ class AuthenticateRouter implements WebRouterInterface
     public function match(HttpRequestInterface $request)
     {
         if (false === SessionUser::isConnected()) {
-            if (true === XConfig::get("Authenticate.useSplashLoginForm")) {
+            if (true === $this->useSplashLoginForm($request)) {
                 return XConfig::get("Authenticate.controllerLoginForm");
             }
         } else {
@@ -50,5 +51,21 @@ class AuthenticateRouter implements WebRouterInterface
                 }
             }
         }
+    }
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    private function useSplashLoginForm(HttpRequestInterface $request)
+    {
+        $useSplashForm = XConfig::get("Authenticate.useSplashLoginForm");
+        if (is_bool($useSplashForm)) {
+            return $useSplashForm;
+        } else {
+            if (is_string($useSplashForm) && $request->get("siteType") === $useSplashForm) {
+                return true;
+            }
+        }
+        return false;
     }
 }

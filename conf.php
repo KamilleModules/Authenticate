@@ -36,9 +36,12 @@ $conf = [
 
     /**
      * Whether or not to display the splash loginForm
-     * if the user is not connected
+     * if the user is not connected.
+     *
+     * Or it can also be a string: the siteType (see kamille docs for more info)
+     * siteType: single | dual.front | dual.back
      */
-    "useSplashLoginForm" => true,
+    "useSplashLoginForm" => 'dual.back',
 
     /**
      * If that key is found in the $_GET array,
