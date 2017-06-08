@@ -80,7 +80,7 @@ $conf = [
     /**
      * The time the user session will last.
      */
-    "sessionTimeout" => 5000 * 60,
+    "sessionTimeout" => 86400 * 1,
     /**
      * Whether or not the session time can be refreshed (usually on every page)
      */

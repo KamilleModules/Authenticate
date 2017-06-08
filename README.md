@@ -89,4 +89,11 @@ class: **Authenticate\BadgeStore\FileBadgeStore**.
 
  
  
+
+History Log
+------------------
+    
+- 1.0.0 -- 2017-06-08
+
+    - base commit
  
