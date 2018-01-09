@@ -25,29 +25,32 @@ class AuthenticateRouter implements WebRouterInterface
 
     public function match(HttpRequestInterface $request)
     {
-        if (false === SessionUser::isConnected()) {
-            if (true === $this->useSplashLoginForm($request)) {
-                return XConfig::get("Authenticate.controllerLoginForm");
-            }
-        } else {
-            $dkey = XConfig::get("Authenticate.disconnectGetKey");
-            if (array_key_exists($dkey, $_GET)) {
-                $get = $_GET;
-                unset($get[$dkey]);
 
-
-                $request->set("response", RedirectResponse::create(Z::uri(null, $get, true, true)));
-                SessionUser::disconnect();
-
-                /**
-                 * By not returning null, we make the router believe a controller was found,
-                 * so that it doesn't loop the other routers.
-                 */
-                return "";
+        if ("dual.back" !== $request->get("siteType")) {
+            if (false === SessionUser::isConnected()) {
+                if (true === $this->useSplashLoginForm($request)) {
+                    return XConfig::get("Authenticate.controllerLoginForm");
+                }
             } else {
+                $dkey = XConfig::get("Authenticate.disconnectGetKey");
+                if (array_key_exists($dkey, $_GET)) {
+                    $get = $_GET;
+                    unset($get[$dkey]);
 
-                if (true === XConfig::get("Authenticate.allowSessionRefresh")) {
-                    SessionUser::refresh();
+
+                    $request->set("response", RedirectResponse::create(Z::uri(null, $get, true, true)));
+                    SessionUser::disconnect();
+
+                    /**
+                     * By not returning null, we make the router believe a controller was found,
+                     * so that it doesn't loop the other routers.
+                     */
+                    return "";
+                } else {
+
+                    if (true === XConfig::get("Authenticate.allowSessionRefresh")) {
+                        SessionUser::refresh();
+                    }
                 }
             }
         }
