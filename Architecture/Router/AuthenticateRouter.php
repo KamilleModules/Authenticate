@@ -6,6 +6,7 @@ namespace Module\Authenticate\Architecture\Router;
 
 use Authenticate\SessionUser\SessionUser;
 use Bat\UriTool;
+use Core\Services\Hooks;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Response\Web\HttpResponseInterface;
@@ -40,6 +41,7 @@ class AuthenticateRouter implements WebRouterInterface
 
                     $request->set("response", RedirectResponse::create(Z::uri(null, $get, true, true)));
                     SessionUser::disconnect();
+                    Hooks::call("Authenticate_Router_onDisconnectAfter");
 
                     /**
                      * By not returning null, we make the router believe a controller was found,
